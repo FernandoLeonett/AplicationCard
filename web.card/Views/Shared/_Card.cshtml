@@ -1,0 +1,40 @@
+﻿@model Card
+
+<div class="col-md-4 col-12 mb-4">
+    <div class="card">
+        <div class="card-image" style="background-image: url('@Url.Content(string.IsNullOrEmpty(Model.UrlImage) ? "~/img/default-image.jpg" : Model.UrlImage)')">
+            <div class="card-title card-title-bg">@Model.Title</div>
+
+            @if (Context.Session.GetString("rol") == Rol.Administrator.ToString())
+            {
+                <div class="card-buttons">
+
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar-modal-@Model.Id">Editar</button>
+
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete-modal-@Model.Id">
+                    Eliminar
+                </button>
+            </div>
+            }
+        </div>
+        <div class="card-body">
+            <p class="card-text">@Model.Description</p>
+        </div>
+        <div class="card-data-source">
+            <p>Fuente de datos: @Model.DataSource</p> <!-- Nuevo elemento para mostrar el origen de los datos -->
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal de confirmación de eliminación -->
+@await Html.PartialAsync("_ConfirmDelete", Model)
+
+
+@await Html.PartialAsync("_EditCard",Model )
+
+
+

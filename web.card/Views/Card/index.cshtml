@@ -1,0 +1,29 @@
+﻿@model IndexViewModel
+
+<div class="container">
+    <flash dismissable="true" />
+
+    <!-- Button para abrir el modal -->
+  
+
+    <div class="row">
+        @foreach (var card in Model.Cards)
+        {
+            @await Html.PartialAsync("_Card", card)
+        }
+    </div>
+
+</div>
+@await Html.PartialAsync("_Create", Model.NewCard)
+
+
+
+
+
+
+
+             
+               
+   
+
+  
